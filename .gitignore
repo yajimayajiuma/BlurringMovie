@@ -1,0 +1,8 @@
+# 全て無視
+*
+
+# 管理したいファイルだけ明示的に許可
+!BlurringMovie.py
+!requirements.txt
+!README.md
+!.gitignore
