@@ -119,7 +119,14 @@ def process_video():
                 finalOutputPath
             ], stdin=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
         
-
+        # stderrを別スレッドで継続的に読み取り、詰まらないようにする
+        ffmpeg_stderr_lines = []
+        def _drain_stderr():
+            for line in ffmpeg_process.stderr:
+                ffmpeg_stderr_lines.append(line)
+        stderr_thread = threading.Thread(target=_drain_stderr, daemon=True)
+        stderr_thread.start()
+    
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
