@@ -10,16 +10,28 @@
     
 ## 実行方法
 - ユーザー向け
-	- ReleasesからBlurringMovie.exeをダウンロードし、ダブルクリックする
+	- ReleasesからBlurringMovie.zipをダウンロードし、任意のフォルダに解凍
+	- 解凍したフォルダ構成を変えず、BlurringMovie.exeをダブルクリックで起動し、動画ファイルを選択する
+	- face_detection_yunet_2023mar.onnx及びffmpeg.exeを移動・削除した場合、プログラムはエラー終了する
 	
 - 開発者向け
 	- requirements.txtをインストール
-	- face_detection_yunet_2023mar.onnxをダウンロードし、BlurringMovie.pyと同じフォルダに配置
-		- [入手先](https://github.com/opencv/opencv_zoo/blob/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx)
-	- ffmpeg.exeをダウンロードし、BlurringMovie.pyと同じフォルダに配置
-		- [入手先](https://ffmpeg.org/download.html)
+	- [Releases](https://github.com/yajimayajiuma/BlurringMovie/releases/tag/v1.1.0) から最新のzipをダウンロードし、
+	  `face_detection_yunet_2023mar.onnx` と `ffmpeg.exe` を`BlurringMovie.py` と同じフォルダに配置
 	- 上記環境を満たし、以下コマンドを実行
 	
 	```sh
 	python BlurringMovie.py
 	```
+
+## 使用ライブラリ・モデルについて
+
+- 本ソフトウェアは [FFmpeg](https://ffmpeg.org) を利用しています。
+  FFmpegはGNU General Public License v3 (GPLv3) の下で配布されています。
+  ライセンス全文は同梱の `LICENSE` を参照してください。
+  ソースコードは [FFmpeg公式サイト](https://ffmpeg.org/download.html) から入手可能です。
+  （本配布物には [gyan.dev](https://www.gyan.dev/ffmpeg/builds/) が提供する
+  ビルド済みバイナリを使用しています）
+
+- 顔検出には [YuNet](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet)
+  （Apache License 2.0）を使用しています。
