@@ -17,7 +17,7 @@ root.attributes('-topmost', True)
 root.withdraw()  
 
 # ファイル選択ダイアログ
-tk.messagebox.showinfo('ファイル選択', 'モザイク処理するファイルを選択してください')
+tk.messagebox.showinfo('ファイル選択', 'ぼかし処理するファイルを選択してください')
 inputMovie = filedialog.askopenfilename(filetypes=[("動画ファイル", "*")])
 
 # プログレスバーを表示するためのサブウィンドウ
@@ -57,10 +57,12 @@ def process_video():
             root.quit()
             return  
 
-        # Nuitkaでパッケージ化された場合、sys._MEIPASSを使用
-        if getattr(sys, 'frozen', False):
-            base_path = sys._MEIPASS
-        else:
+       
+        try:
+            # exe化された場合、exeと同じフォルダを参照するNuitka専用変数
+            base_path = __compiled__.containing_dir
+        except NameError:
+            # 通常のpy実行時はこちらにフォールバック
             base_path = os.path.dirname(os.path.abspath(__file__))
 
         # ONNXモデルのパスを設定
